@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package index;
+
+service Indexer {
+  rpc IndexPost (IndexPostRequest) returns (IndexPostReply) {}
+}
+
+message IndexPostRequest {
+  int64 post_id = 1;  // The ID of the post.
+  string text = 2;    // The text of the post.
+}
+
+message IndexPostReply {
+}
+
