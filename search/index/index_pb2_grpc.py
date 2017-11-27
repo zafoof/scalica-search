@@ -14,8 +14,8 @@ class IndexerStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.IndexPost = channel.unary_unary(
-        '/index.Indexer/IndexPost',
+    self.index = channel.unary_unary(
+        '/index.Indexer/index',
         request_serializer=index__pb2.IndexPostRequest.SerializeToString,
         response_deserializer=index__pb2.IndexPostReply.FromString,
         )
@@ -25,7 +25,7 @@ class IndexerServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
-  def IndexPost(self, request, context):
+  def index(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -35,8 +35,8 @@ class IndexerServicer(object):
 
 def add_IndexerServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'IndexPost': grpc.unary_unary_rpc_method_handler(
-          servicer.IndexPost,
+      'index': grpc.unary_unary_rpc_method_handler(
+          servicer.index,
           request_deserializer=index__pb2.IndexPostRequest.FromString,
           response_serializer=index__pb2.IndexPostReply.SerializeToString,
       ),

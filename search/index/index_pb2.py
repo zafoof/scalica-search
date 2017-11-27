@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='index.proto',
   package='index',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bindex.proto\x12\x05index\"1\n\x10IndexPostRequest\x12\x0f\n\x07post_id\x18\x01 \x01(\x03\x12\x0c\n\x04text\x18\x02 \x01(\t\"\x10\n\x0eIndexPostReply2H\n\x07Indexer\x12=\n\tIndexPost\x12\x17.index.IndexPostRequest\x1a\x15.index.IndexPostReply\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0bindex.proto\x12\x05index\"1\n\x10IndexPostRequest\x12\x0f\n\x07post_id\x18\x01 \x01(\x03\x12\x0c\n\x04text\x18\x02 \x01(\t\"\x1e\n\x0eIndexPostReply\x12\x0c\n\x04text\x18\x01 \x01(\t2D\n\x07Indexer\x12\x39\n\x05index\x12\x17.index.IndexPostRequest\x1a\x15.index.IndexPostReply\"\x00\x62\x06proto3')
 )
 
 
@@ -70,6 +70,13 @@ _INDEXPOSTREPLY = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='text', full_name='index.IndexPostReply.text', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -83,7 +90,7 @@ _INDEXPOSTREPLY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=73,
-  serialized_end=89,
+  serialized_end=103,
 )
 
 DESCRIPTOR.message_types_by_name['IndexPostRequest'] = _INDEXPOSTREQUEST
@@ -112,12 +119,12 @@ _INDEXER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=91,
-  serialized_end=163,
+  serialized_start=105,
+  serialized_end=173,
   methods=[
   _descriptor.MethodDescriptor(
-    name='IndexPost',
-    full_name='index.Indexer.IndexPost',
+    name='index',
+    full_name='index.Indexer.index',
     index=0,
     containing_service=None,
     input_type=_INDEXPOSTREQUEST,

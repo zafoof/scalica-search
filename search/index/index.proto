@@ -3,7 +3,7 @@ syntax = "proto3";
 package index;
 
 service Indexer {
-  rpc IndexPost (IndexPostRequest) returns (IndexPostReply) {}
+  rpc index (IndexPostRequest) returns (IndexPostReply) {}
 }
 
 message IndexPostRequest {
@@ -12,5 +12,6 @@ message IndexPostRequest {
 }
 
 message IndexPostReply {
+  string text = 1;
 }
 
