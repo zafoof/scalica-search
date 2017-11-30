@@ -14,6 +14,11 @@
       <a href="{% url 'micro:login' %}">Log In</a>
     {% endif %}
     {% block header %}{% endblock header %}
+  <div id="search">
+	<form action="/micro/search/" method="post">
+      <input type="submit" value="Search" />
+	</form>
+  </div>
   </div>
   <div id="sidebar">
     {% block sidebar %}{% endblock sidebar %}

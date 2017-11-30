@@ -2,31 +2,30 @@ from concurrent import futures
 import redis
 import Stemmer
 import time
-import index_pb2
-import index_pb2_grpc
+import search_pb2
+import search_pb2_grpc
 import grpc
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
-class Indexer(index_pb2_grpc.IndexerServicer):
-	def index(self, request, context):
+class Search(search_pb2_grpc.SearchServicer):
+	def search(self, request, context):
 		r = redis.Redis(
     		host='54.197.8.84',
     		port=6379)
 		stemmer = Stemmer.Stemmer("english")
 		post = request.text
-		post_id = int(request.post_id)
 		inp = post.split(" ")
 		for word in inp:
 			word = stemmer.stemWord(word)
-			r.sadd(word, post_id)
-		return index_pb2.IndexPostReply(text = "DONE")
+			out = r.sunion(inp)
+		return search_pb2.SearchReply(post_id = out)
 
 
 def main():
 	server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))	
-	index_pb2_grpc.add_IndexerServicer_to_server(Indexer(), server)
-	server.add_insecure_port('[::]:22222')
+	search_pb2_grpc.add_SearchServicer_to_server(Search(), server)
+	server.add_insecure_port('[::]:22221')
 	server.start()
 	try:
 		while True:
