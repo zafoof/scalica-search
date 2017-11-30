@@ -24,7 +24,7 @@ def search(request):
 	if request.method == 'POST':
 		results = search.search(request.POST)
 		for post_id in results:
-			post_list.append(Post.objects.filter(id=post_id) 
+			post_list.append(Post.objects.filter(id=post_id)) 
 		paginator = Paginator(post_list, 10)
 	    page = request.GET.get('page')
   		try:
