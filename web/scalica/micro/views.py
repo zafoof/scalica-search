@@ -1,3 +1,4 @@
+from search.index import indexer
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -6,8 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Following, Post, FollowingForm, PostForm, MyUserCreationForm
-from search import indexer
-from search import search
+from search.search import search
 
 # Anonymous views
 #################
