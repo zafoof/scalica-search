@@ -11,5 +11,3 @@ def index_post(post_id, text):
 	response = stub.index(request, _TIMEOUT_SECONDS)
  	print response
 
-index_post(91, "fuck")
-index_post(93, "bananan")
