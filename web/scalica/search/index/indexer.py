@@ -10,4 +10,3 @@ def index_post(post_id, text):
 	request = index_pb2.IndexPostRequest(post_id=post_id, text=text)
 	response = stub.index(request, _TIMEOUT_SECONDS)
  	print response
-index_post(53,"pinniped seal")

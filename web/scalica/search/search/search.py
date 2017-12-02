@@ -10,4 +10,3 @@ def search(text):
 	response = stub.search(request, _TIMEOUT_SECONDS)
  	print response
 	return response
-search("seal")
