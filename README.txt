@@ -18,6 +18,12 @@ $ cd web/scalica
 $ python manage.py makemigrations micro
 $ python manage.py migrate
 
+Download the following 
+cd ../.. 
+python -m pip install grpcio
+python -m pip install grpcio-tools
+python -m pip install redis
+
 
 # After the first installation, from the project's directory
 Run the server:
