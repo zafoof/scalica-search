@@ -1,6 +1,6 @@
 {% extends "micro/base.html" %}
 {% block content %}
-<form action="/micro/register/" method="post">
+<form action="/register/" method="post">
 <table class="registerTable">
   {% csrf_token %}
   {{ form.as_table }}
