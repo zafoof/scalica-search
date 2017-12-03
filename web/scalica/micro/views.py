@@ -1,3 +1,5 @@
+from search.index import indexer
+from search.search import search
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -35,6 +37,29 @@ def stream(request, user_id):
   try:
     posts = paginator.page(page)
   except PageNotAnInteger:
+
+    posts = paginator.page(1) 
+  except EmptyPage:
+    posts = paginator.page(paginator.num_pages)
+  context = {
+    'posts' : posts,
+  }
+  return render(request, 'stream.html', context)
+
+def search(request):
+  if request.method == 'POST':
+    form = SearchForm(request.POST)
+    new_search = form.save(commit=False)
+    form.text = request.POST['text']
+    results = search.search(form.text)
+    for post_id in results:
+		post_list.append(Post.objects.filter(id=post_id))
+  paginator = Paginator(post_list, 10)
+
+  page = request.GET.get('page')
+  try:
+    posts = paginator.page(page)
+  except PageNotAnInteger:
     # If page is not an integer, deliver first page.
     posts = paginator.page(1) 
   except EmptyPage:
@@ -47,13 +72,6 @@ def stream(request, user_id):
   }
   return render(request, 'micro/stream.html', context)
 
-def search(request):
-  if request.method == 'POST':
-    form = SearchForm(request.POST)
-    new_search = form.save(commit=False)
-    form.text = request.POST['text']
-    print(form.text)
-    return home(request)
 # return render(request, 'micro/post.html', {'form' : form})
 
 def register(request):
@@ -102,6 +120,7 @@ def post(request):
     new_post.user = request.user
     new_post.pub_date = timezone.now()
     new_post.save()
+    indexer.index_post(new_port.id, new_post.text)
     return home(request)
   else:
     form = PostForm
