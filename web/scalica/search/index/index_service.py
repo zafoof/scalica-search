@@ -11,15 +11,15 @@ _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 class Indexer(index_pb2_grpc.IndexerServicer):
 	def index(self, request, context):
 		r = redis.Redis(
-    		host='localhost',
+    		host='54.197.8.84',
     		port=6379)
 		stemmer = Stemmer.Stemmer("english")
 		post = request.text
-		post_id = request.post_id
+		post_id = int(request.post_id)
 		inp = post.split(" ")
 		for word in inp:
 			word = stemmer.stemWord(word)
-			r.lpush(word, post_id)
+			r.sadd(word, post_id)
 		return index_pb2.IndexPostReply(text = "DONE")
 
 
