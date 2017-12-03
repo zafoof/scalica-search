@@ -1,4 +1,5 @@
 from concurrent import futures
+from nltk.corpus import stopwords
 import redis
 import Stemmer
 import time
@@ -17,7 +18,8 @@ class Indexer(index_pb2_grpc.IndexerServicer):
 		post = request.text
 		post_id = int(request.post_id)
 		inp = post.split(" ")
-		for word in inp:
+		filt_inp = [word for word in inp if word not in stopwords.words('english')]
+		for word in filt_inp:
 			word = stemmer.stemWord(word)
 			r.sadd(word, post_id)
 		return index_pb2.IndexPostReply(text = "DONE")
