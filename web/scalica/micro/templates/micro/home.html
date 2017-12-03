@@ -34,7 +34,7 @@
       <tr>
         <td></td>
         <td>
-          <a href="{% url 'stream' post.user_id %}">
+          <a href="{% url 'micro:stream' post.user_id %}">
             {{ post.user.username }}
           </a>
           ({{ post.pub_date|naturaltime }})
