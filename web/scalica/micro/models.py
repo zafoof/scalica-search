@@ -24,7 +24,17 @@ class Following(models.Model):
   def __str__(self):
     return self.follower.username + "->" + self.followee.username
 
+class Search(models.Model):
+  text = models.CharField(max_length=256, default="")
+  def __str__(self):
+    desc = self.text
+    return self.user.username + ':' + desc
 # Model Forms
+class SearchForm(ModelForm):
+  class Meta:
+    model = Search 
+    fields = ('text',)
+
 class PostForm(ModelForm):
   class Meta:
     model = Post

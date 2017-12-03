@@ -8,11 +8,16 @@
 <body>
   <div id="header">
     {% if user.is_authenticated %}
-      {{ user.username }}
+      <a href = "/micro">{{ user.username }}</a>
       <a href="{% url 'micro:logout' %}">Log Out</a>
     {% else %}
       <a href="{% url 'micro:login' %}">Log In</a>
     {% endif %}
+	<form action = "search/" method="POST">
+        {% csrf_token %}
+	<input type="text" name="text">
+	<input type="submit">
+	</form>
     {% block header %}{% endblock header %}
   </div>
   <div id="sidebar">

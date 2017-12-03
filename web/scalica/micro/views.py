@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Following, Post, FollowingForm, PostForm, MyUserCreationForm
+from .models import Following, Post, FollowingForm, PostForm, MyUserCreationForm, SearchForm
 
 
 # Anonymous views
@@ -47,6 +47,15 @@ def stream(request, user_id):
   }
   return render(request, 'micro/stream.html', context)
 
+def search(request):
+  if request.method == 'POST':
+    form = SearchForm(request.POST)
+    new_search = form.save(commit=False)
+    form.text = request.POST['text']
+    print(form.text)
+    return home(request)
+# return render(request, 'micro/post.html', {'form' : form})
+
 def register(request):
   if request.method == 'POST':
     form = MyUserCreationForm(request.POST)
@@ -79,7 +88,8 @@ def home(request):
   context = {
     'post_list': post_list,
     'my_post' : my_post,
-    'post_form' : PostForm
+    'post_form' : PostForm,
+    'search_form' : SearchForm
   }
   return render(request, 'micro/home.html', context)
 
