@@ -37,7 +37,7 @@ chmod 777 /tmp/db.debug.log
 cd ..
 curl -s http://snowball.tartarus.org/wrappers/PyStemmer-1.0.1.tar.gz | tar xzf -
 cd Pystemmer-1.0.1
-python setup.py install
+python setup.py master
 
 pip install -r requirements.txt
 
