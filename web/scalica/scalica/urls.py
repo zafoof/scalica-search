@@ -17,6 +17,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^micro/', include('micro.urls', namespace="micro")),
+    url(r'^', include('micro.urls', namespace="micro")),
     url(r'^admin/', include(admin.site.urls)),
 ]
