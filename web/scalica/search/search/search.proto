@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package index;
+
+service Search {
+  rpc search (SearchRequest) returns (SearchReply) {}
+}
+
+message SearchRequest {
+  string text = 1;    // The text of the search.
+}
+
+message SearchReply {
+  repeated string post_id = 1;
+}
+
