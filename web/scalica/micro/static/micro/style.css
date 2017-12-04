@@ -23,7 +23,11 @@
   clear:both;
   text-align:center;
   padding:5px; 
+  position: fixed;
+  bottom: 0px; 
+  width: 100%;
 }
+
 #status {
   font-size:large;
   padding:10px;
