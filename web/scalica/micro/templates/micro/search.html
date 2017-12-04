@@ -1,0 +1,14 @@
+{% extends "micro/base.html" %}
+{% load humanize %}
+{% load staticfiles %}
+
+{% block content %}
+{% for post in posts %}
+ <p>
+   {{post.user}} {{ post.text }} ({{ post.pub_date|naturaltime }})
+
+</p> 
+ 
+{% endfor %}
+{# TODO: see complete pagination example in Django doc for more #}
+{% endblock %}

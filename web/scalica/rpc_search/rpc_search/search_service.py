@@ -1,3 +1,6 @@
+import nltk
+nltk.download('stopwords')
+from nltk.corpus import stopwords
 from concurrent import futures
 import redis
 import Stemmer

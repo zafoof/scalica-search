@@ -37,20 +37,22 @@ def stream(request, user_id):
   try:
     posts = paginator.page(page)
   except PageNotAnInteger:
-
     posts = paginator.page(1) 
   except EmptyPage:
     posts = paginator.page(paginator.num_pages)
   context = {
     'posts' : posts,
+    'stream_user' : user,
+    'form' : form,
   }
-  return render(request, 'stream.html', context)
+  return render(request, 'micro/stream.html', context)
 
 def search(request):
   if request.method == 'POST':
     form = SearchForm(request.POST)
     form.text = request.POST['text']
     results = rpc_search.search(form.text)
+    post_list = []
     for post_id in results:
 		post_list.append(Post.objects.filter(id=post_id))
   paginator = Paginator(post_list, 10)
@@ -68,7 +70,7 @@ def search(request):
     'posts' : posts,
     'form' : form,
   }
-  return render(request, 'micro/stream.html', context)
+  return render(request, 'micro/search.html', context)
 
 # return render(request, 'micro/post.html', {'form' : form})
 
