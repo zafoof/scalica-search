@@ -70,7 +70,7 @@ def search(request):
     'posts' : posts,
     'form' : form,
   }
-  return render(request, 'micro/stream.html', context)
+  return render(request, 'micro/search.html', context)
 
 # return render(request, 'micro/post.html', {'form' : form})
 
