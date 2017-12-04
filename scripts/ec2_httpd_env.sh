@@ -36,18 +36,17 @@ chmod 777 /tmp/db.debug.log
 
 cd ..
 curl -s http://snowball.tartarus.org/wrappers/PyStemmer-1.0.1.tar.gz | tar xzf -
-cd Pystemmer-1.0.1
+cd /Pystemmer-1.0.1
 python setup.py install
-
-pip install -r requirements.txt
 
 cd /var/www/site
 # Get the source code.
 git clone https://github.com/zafoof/scalica-search.git depot
 cd depot
 git checkout master
-nohup python web/scalica/search/index/index_service.py &
-nohup python web/scalica/search/search/search_service.py &
+pip install -r requirements.txt
+nohup python web/scalica/rpc_search/index/index_service.py &
+nohup python web/scalica/rpc_search/rpc_search/search_service.py &
 ./first_install.sh
 cd db
 ./install_db.sh
