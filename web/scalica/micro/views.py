@@ -51,7 +51,7 @@ def search(request):
     form = SearchForm(request.POST)
     form.text = request.POST['text']
     results = rpc_search.search(form.text)
-	for post_id in results:
+    for post_id in results:
 		post_list.append(Post.objects.filter(id=post_id))
   paginator = Paginator(post_list, 10)
 
