@@ -1,3 +1,5 @@
+import nltk
+nltk.download('stopwords')
 from concurrent import futures
 from nltk.corpus import stopwords
 import redis
