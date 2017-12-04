@@ -118,7 +118,7 @@ def post(request):
     new_post.user = request.user
     new_post.pub_date = timezone.now()
     new_post.save()
-    indexer.index_post(new_port.id, new_post.text)
+    indexer.index_post(new_post.id, new_post.text)
     return home(request)
   else:
     form = PostForm

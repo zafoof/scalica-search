@@ -102,6 +102,9 @@ WSGI_APPLICATION = 'scalica.wsgi.application'
 # Database
 DATABASES = {
   'default': {
+	'USER': 'appserver',
+	'NAME': 'scalica',
+	'PASSWORD': 'foobarzoot',
     'ENGINE': 'django.db.backends.mysql',
     'OPTIONS': {
       'read_default_file': os.path.join(BASE_DIR, '..', 'depot', 'db', 'my.cnf'),
