@@ -1,5 +1,5 @@
-from search.index import indexer
-from search.search import search
+from rpc_search.index import indexer
+from rpc_search.rpc_search import rpc_search
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -49,10 +49,9 @@ def stream(request, user_id):
 def search(request):
   if request.method == 'POST':
     form = SearchForm(request.POST)
-    new_search = form.save(commit=False)
     form.text = request.POST['text']
-    results = search.search(form.text)
-    for post_id in results:
+    results = rpc_search.search(form.text)
+	for post_id in results:
 		post_list.append(Post.objects.filter(id=post_id))
   paginator = Paginator(post_list, 10)
 
@@ -67,7 +66,6 @@ def search(request):
     posts = paginator.page(paginator.num_pages)
   context = {
     'posts' : posts,
-    'stream_user' : user,
     'form' : form,
   }
   return render(request, 'micro/stream.html', context)

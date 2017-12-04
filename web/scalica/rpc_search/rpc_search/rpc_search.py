@@ -8,5 +8,8 @@ def search(text):
 	stub = search_pb2_grpc.SearchStub(channel)
 	request = search_pb2.SearchRequest(text=text)
 	response = stub.search(request, _TIMEOUT_SECONDS)
- 	print response
-	return response
+ 	r = []
+	for p in response.post_id:
+		r.append(int(p))
+	print r
+	return r
