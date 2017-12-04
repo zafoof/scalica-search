@@ -37,14 +37,15 @@ def stream(request, user_id):
   try:
     posts = paginator.page(page)
   except PageNotAnInteger:
-
     posts = paginator.page(1) 
   except EmptyPage:
     posts = paginator.page(paginator.num_pages)
   context = {
     'posts' : posts,
+    'stream_user' : user,
+    'form' : form,
   }
-  return render(request, 'stream.html', context)
+  return render(request, 'micro/stream.html', context)
 
 def search(request):
   if request.method == 'POST':
