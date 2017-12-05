@@ -2,18 +2,22 @@
 {% load humanize %}
 {% load staticfiles %}
 
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
 {% block content %}
 
 {% if posts %}
-
+	<button type="button" class="btn btn-success">Basic</button>
 	{% for post in posts %}
- <p>
+<div class="container">
+ <div class="row">
 
 		{% for x in post %}
-			{{x}}
+			<div class="col-md-6">{{x}}</div>
 		{% endfor %}
 	
- </p>
+ </div>
+</div>
 	{% endfor %} 
 
 {% else %}
