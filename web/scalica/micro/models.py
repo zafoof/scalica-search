@@ -9,10 +9,10 @@ class Post(models.Model):
   text = models.CharField(max_length=256, default="")
   pub_date = models.DateTimeField('date_posted')
   def __str__(self):
-    if len(self.text) < 16:
+    if len(self.text) < 144:
       desc = self.text
     else:
-      desc = self.text[0:16]
+      desc = self.text[0:144]
     return self.user.username + ':' + desc
 
 class Following(models.Model):
@@ -41,6 +41,7 @@ class PostForm(ModelForm):
     fields = ('text',)
     widgets = {
       'text': TextInput(attrs={'id' : 'input_post'}),
+
     }
 
 class FollowingForm(ModelForm):

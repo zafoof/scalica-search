@@ -3,12 +3,22 @@
 {% load staticfiles %}
 
 {% block content %}
-{% for post in posts %}
- <p>
-   {{post.user}} {{ post.text }} ({{ post.pub_date|naturaltime }})
 
-</p> 
- 
-{% endfor %}
+{% if posts %}
+
+	{% for post in posts %}
+ <p>
+
+		{% for x in post %}
+			{{x}}
+		{% endfor %}
+	
+ </p>
+	{% endfor %} 
+
+{% else %}
+	<p> No search results. </p>
+{% endif %}
+	
 {# TODO: see complete pagination example in Django doc for more #}
 {% endblock %}

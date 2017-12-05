@@ -18,6 +18,7 @@ class Search(search_pb2_grpc.SearchServicer):
 		post = request.text
 		inp = post.split(" ")
 		filt_inp = [word for word in inp if word not in stopwords.words('english')]
+		out = []
 		for word in filt_inp:
 			word = stemmer.stemWord(word)
 			out = r.sunion(word)

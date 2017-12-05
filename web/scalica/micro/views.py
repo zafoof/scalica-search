@@ -52,22 +52,24 @@ def search(request):
     form = SearchForm(request.POST)
     form.text = request.POST['text']
     results = rpc_search.search(form.text)
+    print results
     post_list = []
     for post_id in results:
 		post_list.append(Post.objects.filter(id=post_id))
+
   paginator = Paginator(post_list, 10)
 
   page = request.GET.get('page')
   try:
-    posts = paginator.page(page)
+    post_list = paginator.page(page)
   except PageNotAnInteger:
     # If page is not an integer, deliver first page.
-    posts = paginator.page(1) 
+    post_list = paginator.page(1) 
   except EmptyPage:
     # If page is out of range (e.g. 9999), deliver last page of results.
-    posts = paginator.page(paginator.num_pages)
+    post_list = paginator.page(paginator.num_pages)
   context = {
-    'posts' : posts,
+    'posts' : post_list,
     'form' : form,
   }
   return render(request, 'micro/search.html', context)

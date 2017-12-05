@@ -25,7 +25,7 @@
     {% for post in post_list %}
       <tr>
         <td>
-          <img src="{% static "micro/images/user_s.png" %}" alt="Generic User"/>
+          <img id = "user" src="{% static "micro/images/user_s.png" %}" alt="Generic User"/>
         </td>
         <td>
           {{ post.text }}
@@ -43,7 +43,7 @@
     {% endfor %}
   </table>
 {% else %}
-  <p>No posts are available.</p>
+  <p></p>
 {% endif %}
 </div>
 {% endblock %}
