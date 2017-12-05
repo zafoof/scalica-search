@@ -45,8 +45,8 @@ git clone https://github.com/zafoof/scalica-search.git depot
 cd depot
 git checkout master
 pip install -r requirements.txt
-nohup python web/scalica/rpc_search/index/index_service.py &
-nohup python web/scalica/rpc_search/rpc_search/search_service.py &
+python web/scalica/rpc_search/index/index_service.py &
+python web/scalica/rpc_search/rpc_search/search_service.py &
 ./first_install.sh
 cd db
 ./install_db.sh
@@ -63,6 +63,7 @@ cat <<EOF > /etc/apache2/sites-available/scalica.conf
 WSGIScriptAlias / /var/www/site/scalica/scalica/wsgi.py
 WSGIDaemonProcess scalica python-path=/var/www/site/scalica:/var/www/site/depot/env/lib/python2.7/site-packages
 WSGIProcessGroup scalica
+WSGIApplicationGroup %{GLOBAL}
 <Directory /var/www/site/scalica/scalica>
   <Files wsgi.py>
     Require all granted
