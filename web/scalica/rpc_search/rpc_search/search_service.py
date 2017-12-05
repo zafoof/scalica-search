@@ -20,7 +20,7 @@ class Search(search_pb2_grpc.SearchServicer):
 		filt_inp = [word for word in inp if word not in stopwords.words('english')]
 		for word in filt_inp:
 			word = stemmer.stemWord(word)
-			out = r.sunion(inp)
+			out = r.sunion(word)
 		return search_pb2.SearchReply(post_id = out)
 
 
