@@ -128,6 +128,7 @@ def post(request):
     new_post.user = request.user
     new_post.pub_date = timezone.now()
     new_post.save()
+    rpc_success = False
     while not rpc_success:
       try:
         indexer.index_post(new_post.id, new_post.text)
