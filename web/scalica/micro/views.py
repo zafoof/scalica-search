@@ -51,7 +51,13 @@ def search(request):
   if request.method == 'POST':
     form = SearchForm(request.POST)
     form.text = request.POST['text']
-    results = rpc_search.search(form.text)
+    rpc_success = False
+    while not rpc_success:
+      try:
+        results = rpc_search.search(form.text)
+        rpc_success = True
+      except:
+        continue
 
     post_list = []
     for post_id in results:
@@ -122,7 +128,12 @@ def post(request):
     new_post.user = request.user
     new_post.pub_date = timezone.now()
     new_post.save()
-    indexer.index_post(new_post.id, new_post.text)
+    while not rpc_success:
+      try:
+        indexer.index_post(new_post.id, new_post.text)
+        rpc_success = True
+      except:
+        continue
     return home(request)
   else:
     form = PostForm
