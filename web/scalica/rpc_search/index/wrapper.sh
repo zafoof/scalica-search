@@ -1,5 +1,5 @@
 #!/bin/bash
 
-until ${web/scalica/rpc_search/index/wrapper.sh}; do
+until ${python web/scalica/rpc_search/index/index_service.py}; do
 	echo "Indexer crashed. Restarting"
 done
