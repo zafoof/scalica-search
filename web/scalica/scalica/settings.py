@@ -27,7 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGIN_URL = '/micro/login/'
-LOGIN_REDIRECT_URL = '/micro/home/'
+LOGIN_REDIRECT_URL = '/home/'
 
 # Application definition
 

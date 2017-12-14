@@ -76,7 +76,7 @@ def search(request):
     post_list = paginator.page(paginator.num_pages)
   context = {
     'posts' : post_list,
-    'form' : form,
+    'form' : form
   }
   return render(request, 'micro/search.html', context)
 
