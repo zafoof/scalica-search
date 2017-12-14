@@ -45,8 +45,8 @@ git clone https://github.com/zafoof/scalica-search.git depot
 cd depot
 git checkout master
 pip install -r requirements.txt
-python web/scalica/rpc_search/index/index_service.py &
-python web/scalica/rpc_search/rpc_search/search_service.py &
+#python web/scalica/rpc_search/index/index_service.py &
+#python web/scalica/rpc_search/rpc_search/search_service.py &
 ./first_install.sh
 cd db
 ./install_db.sh
