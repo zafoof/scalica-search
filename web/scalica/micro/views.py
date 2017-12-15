@@ -9,7 +9,6 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Following, Post, FollowingForm, PostForm, MyUserCreationForm, SearchForm
 
-
 # Anonymous views
 #################
 def index(request):
@@ -61,12 +60,17 @@ def search(request):
 
     post_list = []
     user_list = []
+    result_list = []
     for post_id in results:
-		filtered = Post.objects.filter(id=post_id)
-		post_list.append(filtered.values_list('text', flat=True))
-		user_id = filtered.values_list('user_id', flat=True)
-		user_list.append(User.objects.get(pk=user_id))
-
+			filtered = Post.objects.filter(id=post_id)
+			post_list.append(filtered.values_list('text', flat=True))
+			user_id = filtered.values_list('user_id', flat=True)
+			user_list.append(User.objects.get(pk=user_id))
+	
+    for i in range(0, len(post_list)):
+      print(user_list[i])
+      print(post_list[i])
+      result_list.append({'user': user_list[i], 'post': post_list[i]})
 
   paginator = Paginator(post_list, 10)
 
@@ -82,6 +86,7 @@ def search(request):
   context = {
     'posts' : post_list,
 	'users' : user_list,
+	'results' : result_list,
     'form' : form
   }
   return render(request, 'micro/search.html', context)
