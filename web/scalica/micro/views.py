@@ -9,7 +9,6 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Following, Post, FollowingForm, PostForm, MyUserCreationForm, SearchForm
 
-
 # Anonymous views
 #################
 def index(request):
@@ -60,8 +59,18 @@ def search(request):
         continue
 
     post_list = []
+    user_list = []
+    result_list = []
     for post_id in results:
-		post_list.append(Post.objects.filter(id=post_id))
+			filtered = Post.objects.filter(id=post_id)
+			post_list.append(filtered.values_list('text', flat=True))
+			user_id = filtered.values_list('user_id', flat=True)
+			user_list.append(User.objects.get(pk=user_id))
+	
+    for i in range(0, len(post_list)):
+      print(user_list[i])
+      print(post_list[i])
+      result_list.append({'user': user_list[i], 'post': post_list[i]})
 
   paginator = Paginator(post_list, 10)
 
@@ -75,7 +84,8 @@ def search(request):
     # If page is out of range (e.g. 9999), deliver last page of results.
     post_list = paginator.page(paginator.num_pages)
   context = {
-    'posts' : post_list,
+    'num_results' : len(result_list),
+	'results' : result_list,
     'form' : form
   }
   return render(request, 'micro/search.html', context)
@@ -122,12 +132,13 @@ def home(request):
 # Allows to post something and shows my most recent posts.
 @login_required
 def post(request):
-  if request.method == 'POST':
+  if request.method == 'POST' and request.POST.get("text"):
     form = PostForm(request.POST)
     new_post = form.save(commit=False)
     new_post.user = request.user
     new_post.pub_date = timezone.now()
     new_post.save()
+    rpc_success = False
     while not rpc_success:
       try:
         indexer.index_post(new_post.id, new_post.text)
@@ -137,7 +148,8 @@ def post(request):
     return home(request)
   else:
     form = PostForm
-  return render(request, 'micro/post.html', {'form' : form})
+  return home(request)
+  #return render(request, 'micro/post.html', {'form' : form})
 
 @login_required
 def follow(request):

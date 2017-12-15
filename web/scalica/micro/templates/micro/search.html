@@ -6,17 +6,18 @@
 
 {% block content %}
 
-{% if posts %}
-	{% for post in posts %}
-<div class="container">
+{% if results %}
+	<h3> {{num_results}} results </h3>
+	{% for result in results %}
+<div class="searchlist">
 		
-		{% for x in post %}
-	<div class="row">
-			<div class="col-lg">{{x}}</div>
+			<div class="row">@{{result.user}}</div></br>
+			{% for s in result.post%}
+			<div class="row">{{s}}</div>
+			{% endfor %} 
 			
-	</div>
-		{% endfor %}
-</div>
+
+</div></br>
 	{% endfor %} 
 
 {% else %}
