@@ -122,7 +122,7 @@ def home(request):
 # Allows to post something and shows my most recent posts.
 @login_required
 def post(request):
-  if request.method == 'POST':
+  if request.method == 'POST' and request.POST:
     form = PostForm(request.POST)
     new_post = form.save(commit=False)
     new_post.user = request.user
