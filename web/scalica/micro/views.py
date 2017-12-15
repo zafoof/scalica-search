@@ -122,7 +122,7 @@ def home(request):
 # Allows to post something and shows my most recent posts.
 @login_required
 def post(request):
-  if request.method == 'POST' and request.POST:
+  if request.method == 'POST' and request.POST.get("text"):
     form = PostForm(request.POST)
     new_post = form.save(commit=False)
     new_post.user = request.user
@@ -138,7 +138,8 @@ def post(request):
     return home(request)
   else:
     form = PostForm
-  return render(request, 'micro/post.html', {'form' : form})
+  return home(request)
+  #return render(request, 'micro/post.html', {'form' : form})
 
 @login_required
 def follow(request):
