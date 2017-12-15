@@ -24,7 +24,6 @@ class Indexer(index_pb2_grpc.IndexerServicer):
 		filt_inp = [word for word in inp if word not in stopwords.words('english')]
 		for word in filt_inp:
 			strippedword = re.sub("[^a-zA-Z]", "", word)
-			print(strippedword)
 			stemmedword = stemmer.stemWord(strippedword)
 			r.sadd(stemmedword, post_id)
 		return index_pb2.IndexPostReply(text = "DONE")
