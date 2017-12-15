@@ -8,15 +8,18 @@
 
 {% if posts %}
 	{% for post in posts %}
+	{% for user in users %}
 <div class="container">
 		
 		{% for x in post %}
 	<div class="row">
-			<div class="col-lg">{{x}}</div>
+			<div class="col">{{x}}</div>
+			<div class="col">-{{user}}</div>
 			
 	</div>
 		{% endfor %}
 </div>
+	{% endfor %} 
 	{% endfor %} 
 
 {% else %}

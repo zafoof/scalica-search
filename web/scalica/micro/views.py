@@ -60,8 +60,13 @@ def search(request):
         continue
 
     post_list = []
+    user_list = []
     for post_id in results:
-		post_list.append(Post.objects.filter(id=post_id))
+		filtered = Post.objects.filter(id=post_id)
+		post_list.append(filtered.values_list('text', flat=True))
+		user_id = filtered.values_list('user_id', flat=True)
+		user_list.append(User.objects.get(pk=user_id))
+
 
   paginator = Paginator(post_list, 10)
 
@@ -76,6 +81,7 @@ def search(request):
     post_list = paginator.page(paginator.num_pages)
   context = {
     'posts' : post_list,
+	'users' : user_list,
     'form' : form
   }
   return render(request, 'micro/search.html', context)
