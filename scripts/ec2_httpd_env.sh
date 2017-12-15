@@ -35,8 +35,8 @@ touch /tmp/db.debug.log
 chmod 777 /tmp/db.debug.log
 
 cd ..
-curl -s http://snowball.tartarus.org/wrappers/PyStemmer-1.0.1.tar.gz | tar xzf -
-cd /PyStemmer-1.0.1
+curl -s http://snowball.tartarus.org/wrappers/PyStemmer-1.3.0.tar.gz | tar xzf -
+cd /PyStemmer-1.3.0
 python setup.py install
 
 cd /var/www/site
