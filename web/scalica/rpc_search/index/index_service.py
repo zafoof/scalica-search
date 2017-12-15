@@ -8,6 +8,7 @@ import time
 import index_pb2
 import index_pb2_grpc
 import grpc
+import re
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
@@ -22,9 +23,10 @@ class Indexer(index_pb2_grpc.IndexerServicer):
 		inp = post.split(" ")
 		filt_inp = [word for word in inp if word not in stopwords.words('english')]
 		for word in filt_inp:
-			word = word.replace(".", "")  
-			word = stemmer.stemWord(word)
-			r.sadd(word, post_id)
+			strippedword = re.sub("[^a-zA-Z]", "", word)
+			print(strippedword)
+			stemmedword = stemmer.stemWord(strippedword)
+			r.sadd(stemmedword, post_id)
 		return index_pb2.IndexPostReply(text = "DONE")
 
 

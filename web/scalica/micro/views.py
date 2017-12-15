@@ -84,8 +84,7 @@ def search(request):
     # If page is out of range (e.g. 9999), deliver last page of results.
     post_list = paginator.page(paginator.num_pages)
   context = {
-    'posts' : post_list,
-	'users' : user_list,
+    'num_results' : len(result_list),
 	'results' : result_list,
     'form' : form
   }
