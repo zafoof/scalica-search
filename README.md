@@ -2,13 +2,13 @@
 
 ## First installation:
 
-** Install required packages. **
+**Install required packages.**
     $ sudo apt-get update; sudo apt-get install mysql-server libmysqlclient-dev python-dev python-virtualenv
 (Mysql appserver password is already created)
 
     $ ./first_install.sh
 
-** Install the proper databases **
+**Install the proper databases**
 - $ cd db
 - $ ./install_db.sh
 (password is foobarzoot)
