@@ -41,7 +41,7 @@
     $ python manage.py runserver
 
 **python**
-    >>> import nltk
-    >>> nltk.download('stopwords')
+    import nltk
+    nltk.download('stopwords')
 
 ## Access the site at http://localhost:8000/micro
