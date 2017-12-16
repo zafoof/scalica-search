@@ -41,6 +41,7 @@
     $ python manage.py runserver
 
 **python**
+
     import nltk
     nltk.download('stopwords')
 
