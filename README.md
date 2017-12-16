@@ -1,22 +1,24 @@
-First installation:
+# Zafoogle for Scalica
 
-Install required packages.
-$ sudo apt-get update; sudo apt-get install mysql-server libmysqlclient-dev python-dev python-virtualenv
+## First installation:
+
+### Install required packages.
+- $ sudo apt-get update; sudo apt-get install mysql-server libmysqlclient-dev python-dev python-virtualenv
 (Mysql appserver password is already created)
 
 $ ./first_install.sh
 
-Install the proper databases
-$ cd db
-$ ./install_db.sh
+### Install the proper databases
+- $ cd db
+- $ ./install_db.sh
 (password is foobarzoot)
-$ cd ..
+- $ cd ..
 
-Sync the database
-$ source ./env/bin/activate
-$ cd web/scalica
-$ python manage.py makemigrations micro
-$ python manage.py migrate
+### Sync the database
+- $ source ./env/bin/activate
+- $ cd web/scalica
+- $ python manage.py makemigrations micro
+- $ python manage.py migrate
 
 Download the following 
 cd ../.. 
