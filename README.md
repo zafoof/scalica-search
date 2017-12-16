@@ -1,5 +1,7 @@
 # Zafoogle for Scalica
 
+Zafoogle is a Full Text Search service for Scalica that allows search queries to be made on user posts.
+
 ## First installation:
 
 **Install required packages.**
@@ -46,3 +48,5 @@
     nltk.download('stopwords')
 
 ## Access the site at http://localhost:8000/micro
+
+Team 10: Balint, Suyasha, Nil, Kara
